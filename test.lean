@@ -1,6 +1,8 @@
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
 
+section
+
 variable (a b c d : ℕ)
 
 example : a * b = b * a := by ring
@@ -96,4 +98,16 @@ example : ∀ a, (Throdd a) → (Throdd (a^3 : ℕ)) := by
   let ⟨k,hk⟩ := h
   use 9 * k^3 + 9 * k^2 + 3 * k
   rw [hk]
+  ring
+
+end
+
+example : ∀ x : ℕ , ∀ y : ℕ , ∃ z : ℕ , x + y = z := by
+  intro x y
+  use x + y
+
+example : ∃ x : ℕ , ∀ y : ℕ , ∃ z : ℕ , x + y = z := by
+  use 0
+  intro y
+  use y
   ring
