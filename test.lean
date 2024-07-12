@@ -86,6 +86,13 @@ example : Throdd 4 := by
 example : Throdd 1 := by
   use 0
 
+example : ∀ a, (Threeven a) → (Threeven (a^2 : ℕ)) := by
+  intro a h
+  let ⟨k,hk⟩ := h
+  use 3 * k^2
+  rw [hk]
+  ring
+
 example : ∀ a, (Threeven a) → (Threeven (a^3 : ℕ)) := by
   intro a h
   let ⟨k,hk⟩ := h
@@ -93,10 +100,33 @@ example : ∀ a, (Threeven a) → (Threeven (a^3 : ℕ)) := by
   rw [hk]
   ring
 
+example : ∀ a, (Throdd a) → (Throdd (a^2 : ℕ)) := by
+  intro a h
+  let ⟨k,hk⟩ := h
+  use 3 * k^2 + 2 * k
+  rw [hk]
+  ring
+
 example : ∀ a, (Throdd a) → (Throdd (a^3 : ℕ)) := by
   intro a h
   let ⟨k,hk⟩ := h
   use 9 * k^3 + 9 * k^2 + 3 * k
+  rw [hk]
+  ring
+
+def Neven (n : Nat) : Prop :=
+  ∃ k : ℕ, n = 9*k
+
+def Nodd (n : Nat) : Prop :=
+  ∃ k : ℕ, n = 9*k + 1
+
+#check Neven
+#check Nodd
+
+example : ∀ a, (Throdd a) → (Nodd (a^3 : ℕ)) := by
+  intro a h
+  let ⟨k,hk⟩ := h
+  use 3 * k^3 + 3 * k^2 + k
   rw [hk]
   ring
 
