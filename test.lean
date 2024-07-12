@@ -111,3 +111,21 @@ example : ∃ x : ℕ , ∀ y : ℕ , ∃ z : ℕ , x + y = z := by
   intro y
   use y
   ring
+
+example : ∀ x : ℕ , ∀ y : ℕ , ∃ z : ℕ , x + y ≠ z := by
+  intro x y
+  use x + y + 1
+  simp
+
+example : ∃ x : ℕ , ∀ y : ℕ , ∃ z : ℕ , x + y ≠ z := by
+  use 0
+  intro y
+  use y + 1
+  simp
+
+example : ¬ ∀ x : ℕ , ∃ y : ℕ , ∀ z : ℕ , x + y = z := by
+  push_neg
+  use 0
+  intro y
+  use y + 1
+  simp
